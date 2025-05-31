@@ -1,0 +1,66 @@
+```
+
+## Setup Instructions
+
+1. * *Create a new ASP.NET Core Web API project:**
+   ```bash
+   dotnet new webapi - n FileManagementAPI
+   cd FileManagementAPI
+   ```
+
+2. **Install required packages:**
+   ```bash
+   dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+   dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+   dotnet add package Microsoft.EntityFrameworkCore.Design
+   dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+   ```
+
+3. **Update PostgreSQL connection string in appsettings.json**
+
+4. **Create and apply database migrations:**
+   ```bash
+   dotnet ef migrations add InitialCreate
+   dotnet ef database update
+   ```
+
+5. **Create uploads folder in wwwroot:**
+   ```bash
+   mkdir wwwroot
+   mkdir wwwroot/uploads
+   ```
+
+6. **Run the application:**
+   ```bash
+   dotnet run
+   ```
+
+## Default Users
+- **Admin:**admin@example.com / Admin123!
+- **User:**user@example.com / User123!
+
+## API Endpoints
+
+### Authentication
+- POST `/ api / auth / register` -Register new user
+- POST `/ api / auth / login` -Login user
+
+### Files
+- POST `/ api / files / upload` -Upload file
+- GET `/ api / files` -Get files(all for admin, own for users)
+        -GET `/ api / files /{ id}` -Get specific file
+- GET `/api/files/{id}/ download` -Download file
+- DELETE `/ api / files /{ id}` -Delete file
+
+### Users (Admin only)
+- GET `/ api / users` -Get all users
+- GET `/api/users/{id}` -Get specific user
+
+## Features
+- JWT-based authentication
+- Role-based authorization (Admin/User)
+- File upload/download/delete
+- Admin can see all files and users
+- Users can only see their own files
+- PostgreSQL database with Entity Framework Core
+- Swagger documentation with JWT support
